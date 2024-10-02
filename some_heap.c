@@ -2,23 +2,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "heap.h"
+#include "some_heap.h"
 
 #define KEY_NOT_PRESENT -1
 
 heap_t *heap_create(int capacity) {
+    heap_t *heap = (heap_t *)malloc(sizeof(heap_t));
+    
+    heap->size = 0;
+    heap->capacity = capacity;
+
+    heap->data = (heap_node_t *)malloc(capacity * sizeof(heap_node_t));
+
+    return heap;
 }
 
 void heap_free(heap_t *heap) {
+    free(heap->data);
+    free(heap);
 }
 
 unsigned int heap_size(heap_t *heap) { return heap->size; }
 
-unsigned int heap_parent(unsigned int index) {  }
+unsigned int heap_parent(unsigned int index) {}
 
-unsigned int heap_left_child(unsigned int index) { }
+unsigned int heap_left_child(unsigned int index) { return 2 * index + 1; }
 
-unsigned int heap_right_child(unsigned int index) {  }
+unsigned int heap_right_child(unsigned int index) { return 2 * index - 1; }
 
 unsigned int heap_level(unsigned int index) {}
 
